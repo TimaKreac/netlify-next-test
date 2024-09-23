@@ -1,13 +1,7 @@
-import { headers } from "next/headers";
 import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function Home() {
-  const headersList = headers();
-  const originalUrl = headersList.get("x-url");
-
-  console.log("originalUrl", originalUrl);
-
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -21,7 +15,7 @@ export default function Home() {
         />
         <ol>
           <li>
-            Get started by editing <code>app/page.tsx</code>.
+            Get started by editing <code>src/app/page.tsx</code>.
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>
