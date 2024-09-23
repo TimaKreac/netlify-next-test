@@ -1,7 +1,13 @@
+import { headers } from "next/headers";
 import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function Home() {
+  const headersList = headers();
+  const originalUrl = headersList.get("x-url");
+
+  console.log("originalUrl", originalUrl);
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
