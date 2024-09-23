@@ -1,26 +1,12 @@
-import type { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
+import { type MiddlewareResponse } from "@netlify/next";
+import { NextResponse, type NextRequest } from "next/server";
 
-export async function middleware(request: NextRequest) {
-  const { pathname, search, origin } = request.nextUrl;
-  const response = NextResponse.next();
-  const fullURL = origin + pathname;
+type NextRequestCustom = Omit<NextRequest, "geo"> & { geo: any };
 
-  console.log("1", request.nextUrl);
-  console.log("2", pathname);
+export async function middleware(
+  nextRequest: NextRequestCustom
+): Promise<MiddlewareResponse | NextResponse> {
+  console.log("test");
 
-  if (pathname.endsWith("/")) {
-    response.headers.set("X-Robots-Tag", "noindex");
-  }
-
-  response.headers.set("x-pathname", pathname);
-  response.headers.set("x-url", fullURL);
-  response.headers.set("x-queryString", search);
-
-  return response;
+  return NextResponse.next();
 }
-
-export const config = {
-  matcher:
-    "/((?!api|_next/static|_next/image|favicon|manifest|robots|sitemap*|opengraph-image|twitter-image).*)",
-};
